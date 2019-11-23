@@ -14,9 +14,51 @@ namespace CourseLibrary.API.DbContexts
         public DbSet<Author> Authors { get; set; }
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<ComplaintDetail> ComplaintDetails { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // seed the database with dummy data
+
+            modelBuilder.Entity<ComplaintDetail>().HasData(
+                 new ComplaintDetail()
+                 {
+                     Area = "Swargate",
+                     City = "Pune",
+                     ContactNumber = "",
+                     CreatedDate = DateTime.UtcNow,
+                     LastModifiedDate = DateTime.Now,
+                     EmailAddress = "akshayslodha@gmail.com",
+                     Id = Guid.NewGuid(),
+                     IssueDescription ="Since Last Four Days we are since Network Range Issues in Area. Please can you resolve asap",
+                     Title= "Internet Range Issue"
+                 },
+                 new ComplaintDetail()
+                 {
+                     Area = "Magarpatta",
+                     City = "Pune",
+                     ContactNumber = "",
+                     CreatedDate = DateTime.UtcNow,
+                     LastModifiedDate = DateTime.Now,
+                     EmailAddress = "akshayslodha@gmail.com",
+                     Id = Guid.NewGuid(),
+                     IssueDescription = "Increase in Call Drop Since Last Few Days",
+                     Title = "Call Drop Issue"
+                 },
+                 new ComplaintDetail()
+                 {
+                     Area = "Magarpatta",
+                     City = "Pune",
+                     ContactNumber = "",
+                     CreatedDate = DateTime.UtcNow,
+                     LastModifiedDate = DateTime.Now,
+                     EmailAddress = "lodha.rohit1@gmail.com",
+                     Id = Guid.NewGuid(),
+                     IssueDescription = "Increase in Call Drop Since Last Few Days",
+                     Title = "Call Drop Issue"
+                 }
+                );
+
             modelBuilder.Entity<Author>().HasData(
                 new Author()
                 {

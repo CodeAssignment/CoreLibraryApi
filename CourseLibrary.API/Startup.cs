@@ -62,12 +62,14 @@ namespace CourseLibrary.API
 
             services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
 
+            services.AddScoped<IComplaintDetailRepository, ComplaintDetailRepository>();
+
             services.AddDbContext<CourseLibraryContext>(options =>
             {
                 options.UseSqlServer(
                     //Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True
                     //@"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;"
-                    @"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Database=CoreLibraryDB;"
+                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CoreLibraryDB;Integrated Security=True"
                     );
                     
             }); 
@@ -76,24 +78,11 @@ namespace CourseLibrary.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler(appBuilder =>
-                {
-                    appBuilder.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
-                    });
-                });
 
-            }
+            app.UseDeveloperExceptionPage();
+           
 
-            app.UseRouting();
+                app.UseRouting();
 
             app.UseAuthorization();
 
