@@ -75,7 +75,7 @@ namespace CourseLibrary.API.Controllers
         }
 
         [HttpDelete("{complaintId}")]
-        public ActionResult DeleteAuthor(Guid complaintId)
+        public ActionResult DeleteComplaintDetail(Guid complaintId)
         {
             var complaintDetailFromRepo = _complaintDetailRepository.GetComplaintDetail(complaintId);
 
