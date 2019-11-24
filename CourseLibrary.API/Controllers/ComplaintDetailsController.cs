@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CourseLibrary.API.Models;
-using CourseLibrary.API.ResourceParameters;
 using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace CourseLibrary.API.Controllers
 {
@@ -27,11 +24,71 @@ namespace CourseLibrary.API.Controllers
         }
 
         [HttpGet("{emailId}")]
-        public ActionResult<IEnumerable<ComplaintDetailDto>> GetAuthors(
+        public ActionResult<IEnumerable<ComplaintDetailDto>> GetComplaintDetails(
             [FromRoute] string emailId)
         {
             var complaintDetailsFromRepo = _complaintDetailRepository.GetComplaintDetails(emailId);
             return Ok(_mapper.Map<IEnumerable<ComplaintDetailDto>>(complaintDetailsFromRepo));
+        }
+
+        [HttpGet("{complaintId}/ComplaintDetail", Name = "GetComplaintDetail")]
+        public IActionResult GetComplaintDetail(Guid complaintId)
+        {
+            var complaintDetailFromRepo = _complaintDetailRepository.GetComplaintDetail(complaintId);
+
+            if (complaintDetailFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<ComplaintCompleteDetailDto>(complaintDetailFromRepo));
+        }
+
+        [HttpPost]
+        public ActionResult<ComplaintDetailDto> CreateComplaintDetail(ComplaintDetailForCreationDto complaintdetail)
+        {
+            var complaintDetailEntity = _mapper.Map<Entities.ComplaintDetail>(complaintdetail);
+            _complaintDetailRepository.AddComplaintDetail(complaintDetailEntity);
+            _complaintDetailRepository.Save();
+
+            var complaintDetailToReturn = _mapper.Map<ComplaintDetailDto>(complaintDetailEntity);
+            return CreatedAtRoute("GetComplaintDetail",
+                new { complaintId = complaintDetailToReturn.Id },
+                complaintDetailToReturn);
+        }
+
+        [HttpPut("{complaintId}")]
+        public IActionResult UpdateComplaintDetail(Guid complaintId,
+            ComplaintDetailForUpdateDto complaintDetail)
+        {
+            if (!_complaintDetailRepository.ComplaintExists(complaintId))
+            {
+                return NotFound();
+            }
+            var complaintDetailFromRepo = _complaintDetailRepository.GetComplaintDetail(complaintId);
+            _mapper.Map(complaintDetail, complaintDetailFromRepo);
+
+            _complaintDetailRepository.UpdateComplaintDetail(complaintDetailFromRepo);
+
+            _complaintDetailRepository.Save();
+            return NoContent();
+        }
+
+        [HttpDelete("{complaintId}")]
+        public ActionResult DeleteAuthor(Guid complaintId)
+        {
+            var complaintDetailFromRepo = _complaintDetailRepository.GetComplaintDetail(complaintId);
+
+            if (complaintDetailFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _complaintDetailRepository.DeleteComplaintDetail(complaintDetailFromRepo);
+
+            _complaintDetailRepository.Save();
+
+            return NoContent();
         }
     }
 }

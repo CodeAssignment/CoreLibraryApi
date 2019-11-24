@@ -10,6 +10,15 @@ namespace CourseLibrary.API.Services
     {
         IEnumerable<ComplaintDetail> GetComplaintDetails(string emailAddress);
 
+        ComplaintDetail GetComplaintDetail(Guid complaintId);
 
+        void AddComplaintDetail(ComplaintDetail complaintDetail);
+
+        void UpdateComplaintDetail(ComplaintDetail complaintDetail);
+
+        void DeleteComplaintDetail(ComplaintDetail complaintDetail);
+
+        bool Save();
+        bool ComplaintExists(Guid complaintId);
     }
 }
