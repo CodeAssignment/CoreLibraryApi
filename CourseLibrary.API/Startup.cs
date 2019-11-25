@@ -60,8 +60,6 @@ namespace CourseLibrary.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
-
             services.AddScoped<IComplaintDetailRepository, ComplaintDetailRepository>();
 
             services.AddDbContext<CourseLibraryContext>(options =>
