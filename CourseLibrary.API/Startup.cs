@@ -67,12 +67,11 @@ namespace CourseLibrary.API
             services.AddDbContext<CourseLibraryContext>(options =>
             {
                 options.UseSqlServer(
-                    //Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True
-                    //@"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;"
-                    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CoreLibraryDB;Integrated Security=True"
+                    @"Server=(localdb)\MSSQLLocalDB;Database=CoreLibraryDB;Trusted_Connection=False;
+                    MultipleActiveResultSets=true;Integrated Security=False;User ID=demouser;Password=demouser123"
                     );
-                    
-            }); 
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,9 +79,9 @@ namespace CourseLibrary.API
         {
 
             app.UseDeveloperExceptionPage();
-           
 
-                app.UseRouting();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 

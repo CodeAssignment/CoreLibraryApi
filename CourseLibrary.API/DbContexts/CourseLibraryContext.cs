@@ -28,7 +28,7 @@ namespace CourseLibrary.API.DbContexts
                      ContactNumber = "",
                      CreatedDate = DateTime.UtcNow,
                      LastModifiedDate = DateTime.Now,
-                     EmailAddress = "akshayslodha@gmail.com",
+                     EmailAddress = "ab123@gmail.com",
                      Id = Guid.NewGuid(),
                      IssueDescription ="Since Last Four Days we are since Network Range Issues in Area. Please can you resolve asap",
                      Title= "Internet Range Issue"
@@ -40,7 +40,7 @@ namespace CourseLibrary.API.DbContexts
                      ContactNumber = "",
                      CreatedDate = DateTime.UtcNow,
                      LastModifiedDate = DateTime.Now,
-                     EmailAddress = "akshayslodha@gmail.com",
+                     EmailAddress = "ab123@gmail.com",
                      Id = Guid.NewGuid(),
                      IssueDescription = "Increase in Call Drop Since Last Few Days",
                      Title = "Call Drop Issue"
@@ -52,7 +52,7 @@ namespace CourseLibrary.API.DbContexts
                      ContactNumber = "",
                      CreatedDate = DateTime.UtcNow,
                      LastModifiedDate = DateTime.Now,
-                     EmailAddress = "lodha.rohit1@gmail.com",
+                     EmailAddress = "231abc@gmail.com",
                      Id = Guid.NewGuid(),
                      IssueDescription = "Increase in Call Drop Since Last Few Days",
                      Title = "Call Drop Issue"
