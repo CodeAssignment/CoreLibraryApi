@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using CourseLibrary.API.Models;
 using CourseLibrary.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
 namespace CourseLibrary.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/complaintDetails")]
     public class ComplaintDetailsController : ControllerBase
